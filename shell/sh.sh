@@ -91,3 +91,20 @@ sudo mv /opt/cni/bin/* /usr/libexec/cni/
 sudo modprobe br_netfilter
 lsmod | grep br_netfilter
 echo 'br_netfilter' | sudo tee /etc/modules-load.d/k8s.conf
+
+
+#Certificado HTTPS local------------------
+
+#Cria os arquivos locais .key e .crt.
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout mzhtml-local.key \
+  -out mzhtml-local.crt \
+  -subj "/CN=IP_DA_MÁQUINA"
+
+#Cria o certificado local.
+kubectl create secret tls mzhtml-local \
+  --cert=mzhtml-local.crt \
+  --key=mzhtml-local.key
+secret/mzhtml-local created
+
+

@@ -13,7 +13,7 @@ spec:
         app: mzhtml
     spec:
       containers:
-      - name: mzhtml
-        image: mzti/mzhtml2:v1
+      - name: nginx
+        image: mzti/mzhtml:v1  
         ports:
         - containerPort: 80

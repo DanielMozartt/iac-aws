@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mzhtml-ingress
+  annotations:
+    # Ativa o HTTPS/TLS no Traefik para qualquer requisição
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: traefik
+  tls:
+  - secretName: mzhtml-local # O Traefik usará este certificado como padrão
+  rules:
+  - http: 
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: mzhtml-service
+            port:
+              number: 80
+
