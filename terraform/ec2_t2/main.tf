@@ -41,12 +41,6 @@ resource "aws_instance" "maquina_simples" {
   security_groups             = [module.security_group.security_group_name]
   associate_public_ip_address = true # Garante a associação automática de um IP público
 
-
-  #Script para instalar o K3S.
-  user_data = templatefile("${path.root}/../../shell/k3s_deployment.sh", {
-    nome_usuario = var.username
-  })
-
   tags = {
     Name = "mzti-mzhtml"
   }
