@@ -27,3 +27,5 @@ terraform.tfstate.backup
 crash.log
 *.tfvars
 *.tfplan
+
+ip_publico.json
