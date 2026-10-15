@@ -1,7 +1,0 @@
-{
-  "public_ip": {
-    "sensitive": false,
-    "type": "string",
-    "value": "52.67.58.70"
-  }
-}

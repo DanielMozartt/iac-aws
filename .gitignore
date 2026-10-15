@@ -28,5 +28,4 @@ crash.log
 *.tfvars
 *.tfplan
 
-terraform\ec2_t2\ip_publico.json
-terraform\ec2_t3\ip_publico.json
+**/ip_publico.json
