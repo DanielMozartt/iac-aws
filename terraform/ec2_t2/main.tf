@@ -43,62 +43,9 @@ resource "aws_instance" "maquina_simples" {
 
 
   #Script para instalar o K3S.
-  user_data = <<-EOF
-    #!/bin/bash
-    
-    # 1. Instalar K3s (servidor + agente)
-    curl -sfL https://get.k3s.io | sh -
-    
-    # Aguarda o K3s iniciar
-    sleep 30
-    
-    # 2. Configurar kubectl para usar o kubeconfig gerado pelo K3s
-    export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
-
-    # Adiciona alias kubectl. 
-echo 'alias kubectl="sudo k3s kubectl"' >> ~/.bashrc
-source ~/.bashrc
-
-# Crie o primeiro arquivo
-cat <<EOT > deployment.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: mzhtml
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: mzhtml
-  template:
-    metadata:
-      labels:
-        app: mzhtml
-    spec:
-      containers:
-      - name: mzhtml
-        image: mzti/mzhtml:v1
-        ports:
-        - containerPort: 80
-EOT
-
-# Crie o segundo arquivo
-cat <<EOT > services.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: mzhtml-service
-spec:
-  selector:
-    app: mzhtml
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
-  type: LoadBalancer
-EOT
-
-EOF
+  user_data = templatefile("${path.root}/../../shell/k3s_deployment.sh", {
+    nome_usuario = var.username
+  })
 
   tags = {
     Name = "mzti-mzhtml"

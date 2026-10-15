@@ -15,3 +15,9 @@ variable "public_key_path_windows" {
   type        = string
   default     = "~/.ssh/id_rsa.pub"
 }
+
+variable "username" {
+  type        = string
+  description = "Usuário padrão do sistema operacional da AMI"
+  default     = "ubuntu"
+}
