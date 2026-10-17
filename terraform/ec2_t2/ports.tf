@@ -1,32 +1,33 @@
 # Configuração de portas para o ambiente EC2 T2
-# Para adicionar ou remover portas, basta editar esta lista
+data "http" "meu_ip" {
+  url = "https://ifconfig.me"
+}
 
 locals {
-  # Defina aqui todas as portas que precisam ser liberadas
-  # Para K3s com aplicacao web
+
   ingress_ports = [
     {
       port        = 22
       protocol    = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
-      description = "SSH - Remote access"
+      cidr_blocks = ["${chomp(data.http.meu_ip.response_body)}/32"]
+      description = "SSH"
     },
     {
       port        = 80
       protocol    = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
-      description = "HTTP - Web application"
+      description = "HTTP"
     },
     {
       port        = 443
       protocol    = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
-      description = "HTTPS - Secure web app"
+      description = "HTTPS"
     },
     {
       port        = 6443
       protocol    = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
+      cidr_blocks = ["${chomp(data.http.meu_ip.response_body)}/32"]
       description = "K3s API Server"
     }
   ]

@@ -25,5 +25,6 @@ export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 sudo k3s kubectl apply -f https://raw.githubusercontent.com/DanielMozartt/iac-aws/main/k3s/deployment.yaml
 sudo k3s kubectl apply -f https://raw.githubusercontent.com/DanielMozartt/iac-aws/main/k3s/service.yaml
 sudo k3s kubectl apply -f https://raw.githubusercontent.com/DanielMozartt/iac-aws/main/k3s/ingress.yaml
+sudo k3s kubectl apply -f https://raw.githubusercontent.com/DanielMozartt/iac-aws/main/k3s/redirect.yaml
 
 sudo reboot
