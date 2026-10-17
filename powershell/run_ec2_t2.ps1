@@ -4,9 +4,9 @@ if (-not(Get-ChildItem $HOME\.ssh\id_rsa.pub -ErrorAction SilentlyContinue)) {
 }
 
 # Inicializa e aplica o Terraform
-terraform -chdir=terraform/ec2_t2 init -upgrade
-terraform -chdir=terraform/ec2_t2 plan -var="os_type=windows"
-terraform -chdir=terraform/ec2_t2 apply -var="os_type=windows" -auto-approve
+terraform -chdir=terraform/ec2 init -upgrade
+terraform -chdir=terraform/ec2 plan 
+terraform -chdir=terraform/ec2 apply -auto-approve
 
 # Exporta o output em JSON
 terraform -chdir=terraform/ec2_t2 output -json | Out-File -FilePath terraform/ec2_t2/ip_publico.json -Encoding utf8

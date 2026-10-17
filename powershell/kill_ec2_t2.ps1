@@ -11,4 +11,4 @@ $dir = git rev-parse --show-toplevel
 Set-Location "$dir"
 
 # Deleta a instância ec2_t2.
-terraform -chdir=terraform/ec2_t2 destroy -auto-approve
+terraform -chdir=terraform/ec2 destroy -auto-approve

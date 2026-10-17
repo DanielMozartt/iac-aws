@@ -27,4 +27,6 @@ sudo k3s kubectl apply -f https://raw.githubusercontent.com/DanielMozartt/iac-aw
 sudo k3s kubectl apply -f https://raw.githubusercontent.com/DanielMozartt/iac-aws/main/k3s/ingress.yaml
 sudo k3s kubectl apply -f https://raw.githubusercontent.com/DanielMozartt/iac-aws/main/k3s/redirect.yaml
 
-sudo reboot
+
+POD=$(sudo k3s kubectl get pods -n "$NAME" --no-headers -o custom-columns=":metadata.name" | grep "^$PREFIXO_MZHTML" | head -n 1)
+sudo k3s kubectl delete pod "$POD" -n "$NAME"
