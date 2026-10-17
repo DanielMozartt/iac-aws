@@ -110,7 +110,7 @@ resource "aws_instance" "ec2" {
               sleep 60
 
               # Baixa o script k3s_deployment.sh de implementação do k3s do github e faz a implementação da imagem docker contendo o html estático no k3s via deployment, services e ingress.
-              curl -sfL https://raw.githubusercontent.com/DanielMozartt/iac-aws/refs/heads/main/shell/k3s_deployment.sh | sh -
+              curl -sfL https://raw.githubusercontent.com/DanielMozartt/iac-aws/main/shell/k3s_deployment.sh | sh -
             EOF
 
   tags = {
