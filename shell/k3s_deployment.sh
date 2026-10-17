@@ -17,6 +17,7 @@ curl -sfL https://get.k3s.io | sh -
     
 # Aguarda o K3s iniciar
 sleep 60
+
 # Configurar kubectl para usar o kubeconfig gerado pelo K3s
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
@@ -24,3 +25,5 @@ export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 sudo k3s kubectl apply -f https://raw.githubusercontent.com/DanielMozartt/iac-aws/main/k3s/deployment.yaml
 sudo k3s kubectl apply -f https://raw.githubusercontent.com/DanielMozartt/iac-aws/main/k3s/service.yaml
 sudo k3s kubectl apply -f https://raw.githubusercontent.com/DanielMozartt/iac-aws/main/k3s/ingress.yaml
+
+sudo reboot

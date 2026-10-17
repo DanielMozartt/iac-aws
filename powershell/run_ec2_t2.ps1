@@ -17,7 +17,9 @@ Start-Sleep 10
 $IP_PUBLICO = terraform -chdir=terraform/ec2_t2 output -raw public_ip
 
 # Lê o script de implementação do k3s e joga direto no interpretador bash do Linux remoto.
-Get-Content -Raw ".\shell\k3s_deployment.sh" | ssh -i "$HOME\.ssh\id_rsa" "ubuntu@$IP_PUBLICO" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "cat - > /tmp/deployk3s.sh && chmod +x /tmp/deployk3s.sh && sudo /tmp/deployk3s.sh"
+Get-Content -Raw ".\shell\k3s_deployment.sh" | ssh -i "$HOME\.ssh\id_rsa" "ubuntu@$IP_PUBLICO" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "curl -sfL https://raw.githubusercontent.com/DanielMozartt/iac-aws/refs/heads/main/shell/k3s_deployment.sh | sh -"
+
+Start-Sleep 100
 
 # Abre o Edge direto no IP público da ec2.
 Start-Process msedge.exe -ArgumentList "https://$IP_PUBLICO"

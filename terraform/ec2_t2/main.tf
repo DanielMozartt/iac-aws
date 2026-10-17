@@ -4,7 +4,7 @@ data "aws_ami" "ubuntu" {
     name   = "name"
     values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
   }
-  owners = ["099720109477"] # ID do proprietário Canonical
+  owners = ["099720109477"]
 }
 
 # 3. Cria um Key Pair AWS para acesso SSH
