@@ -1,0 +1,1 @@
+terraform -chdir=terraform/ec2 destroy -var="ec2_type=t4g.micro" -auto-approve

@@ -1,1 +1,1 @@
-terraform -chdir=terraform/ec2_t3 destroy -auto-approve
+terraform -chdir=terraform/ec2 destroy -var="ec2_type=t3.micro" -auto-approve

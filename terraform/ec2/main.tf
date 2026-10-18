@@ -3,16 +3,29 @@ provider "aws" {
   region = "us-east-1"
 }
 
+#Define o tipo da EC2 com base na entrada recebida pelo usuário em -var="", valor padrão sem declarar é t4g.micro.
+locals {
+  is_arm           = length(regexall("^t4g", var.ec2_type)) > 0
+  canonical_arch   = local.is_arm ? "arm64" : "amd64"
+  aws_architecture = local.is_arm ? "arm64" : "x86_64"
+}
 
-#Define o sistema ubuntu para ser usado na ec2.
+#Seleciona a AMI correta baseada na arquitetura escolhida.
 data "aws_ami" "ubuntu" {
   most_recent = true
+  owners      = ["099720109477"]
+
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
+    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-${local.canonical_arch}-server-*"]
   }
-  owners = ["099720109477"]
+
+  filter {
+    name   = "architecture"
+    values = [local.aws_architecture]
+  }
 }
+
 
 #Captura meu ip atual para acessos nas portas privadas.
 data "http" "meu_ip" {
@@ -96,10 +109,10 @@ resource "aws_key_pair" "chave_ec2_mzhtml" {
 #Cria a instância EC2 t2.micro ou t3.micro.
 resource "aws_instance" "ec2" {
   ami           = data.aws_ami.ubuntu.id
-  instance_type = var.tipo_t3 ? var.ec2_t3 : var.ec2_t2
+  instance_type = var.ec2_type
 
   key_name                    = aws_key_pair.chave_ec2_mzhtml.key_name
-  vpc_security_group_ids             = [aws_security_group.k3s_mzhtml_sg.id]
+  vpc_security_group_ids      = [aws_security_group.k3s_mzhtml_sg.id]
   associate_public_ip_address = true
 
   user_data = <<-EOF
