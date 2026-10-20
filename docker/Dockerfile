@@ -1,14 +1,14 @@
-# Usando Nginx como servidor web
+#Escolhe o Nginx como servidor web.
 FROM nginx:alpine
 
-# Remover arquivos padrão do Nginx
+#Remove os arquivos padrão do Nginx
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copiar todo o conteúdo do projeto para a pasta do Nginx
+#Copia todo o conteúdo do projeto que está na subpasta html para a pasta do Nginx.
 COPY html/ /usr/share/nginx/html/
 
-# Expor a porta 80
+#Expôe a porta 80.
 EXPOSE 80
 
-# Comando padrão do Nginx
+#Executa o comando padrão do Nginx ao iniciar.
 CMD ["nginx", "-g", "daemon off;"]

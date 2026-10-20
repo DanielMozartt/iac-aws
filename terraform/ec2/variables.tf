@@ -1,6 +1,6 @@
 variable "ec2_type" {
   type        = string
-  default     = "t3.micro"
+  default     = "t2.micro"
   description = "Tipo da instância t2.micro, t3.micro ou t4g.micro)"
 }
 
