@@ -1,3 +1,6 @@
+#Realizar o login no docker na sessão atual.
+docker login
+
 #Criar um construtor Multi-Arquitetura para permitir o docker criar imagem compatível em várias plataformas diferentes.
 docker buildx create --use --driver docker-container --name construtor_multi_plataforma
 

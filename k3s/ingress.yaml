@@ -7,7 +7,7 @@ metadata:
 spec:
   ingressClassName: traefik
   tls:
-  - secretName: mzhtml-local 
+  - {} 
   rules:
   - http: 
       paths:
