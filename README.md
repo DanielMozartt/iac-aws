@@ -2,8 +2,6 @@
 
 Este repositório foi criado exclusivamente para **fins de estudo e prática de DevOps**. O objetivo deste laboratório é subir um site em HTML na AWS usando Kubernetes (K3s), Docker e Terraform.
 
-O grande diferencial é a **automação autônoma**: a infraestrutura é criada e o Kubernetes é configurado inteiramente sozinho no primeiro boot da máquina. Não é necessário fazer acesso SSH para digitar comandos no servidor.
-
 ---
 
 ## 🛠️ O que foi feito neste projeto?
